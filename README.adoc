@@ -1,0 +1,54 @@
+= RPG AsciiDoc template
+:author: Chris Barnes
+
+== To do
+
+* [ ] Fix epub
+* [ ] Get travis to upload PDF on release
+* [ ] Write more about AsciiDoc for RPGs
+** [ ] Flesh out ``index.adoc`` with more syntax examples
+
+== Features
+
+Write your RPG rules in plain text, and easily convert it into a web page and PDF (epub soon!).
+Manage your edit history with git, and collaborate with others on GitHub.
+When you're ready to release it, just tag the git commit and push: the web page will be uploaded to github.io, and other output files will be uploaded to GitHub's releases page.
+
+== Usage
+
+Requires ``git``, a GitHub account, and a Travis CI account (you can sign in with GitHub).
+
+. Fork this repository
+. Enable your fork's repository on Travis
+. Create an access token on GitHub
+. In the Travis settings for your fork, save this access token as an environment variable, ``GITHUB_TOKEN``
+
+=== Local
+
+Requires modern versions of https://www.ruby-lang.org/en/[ruby] and https://bundler.io/[bundler]
+
+----
+# install dependencies
+bundle
+
+# build html, pdf, to a folder called "out"
+rake html
+rake pdf
+
+# build all
+rake all
+# or just
+rake
+----
+
+=== Releasing online
+
+----
+git tag -a v1.0.0 -m "The first version!"
+git push --tags
+----
+
+== Links
+
+* This template's automatically-generated website
+* https://github.com/clbarnes/OpenDoc6/[Example project]

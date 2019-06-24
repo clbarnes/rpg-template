@@ -1,0 +1,36 @@
+language: ruby
+cache: bundler
+env:
+  - TGT=html
+  - TGT=pdf
+  - TGT=epub
+matrix:
+  allow_failures:
+    - env: TGT=epub
+before_install:
+  - gem update --system
+  - gem install bundler
+script: bundle exec rake $TGT
+before_deploy:
+  - bundle exec rake clean
+  - bundle exec rake html pdf
+  - mkdir -p page
+  - mv out/index.html page/index.html
+deploy:
+  - provider: releases
+    api_key: $GITHUB_TOKEN
+    file_glob: true
+    file: out/*
+    skip_cleanup: true
+    keep_history: true
+    on:
+      branch: master
+      tags: true
+  - provider: gh-pages
+    github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+    skip_cleanup: true
+    local_dir: page/
+    keep_history: true
+    on:
+      branch: master
+      tags: true
