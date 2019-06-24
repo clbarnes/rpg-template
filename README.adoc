@@ -16,12 +16,12 @@ When you're ready to release it, just tag the git commit and push: the web page 
 
 == Usage
 
-Requires ``git``, a GitHub account, and a Travis CI account (you can sign in with GitHub).
+Requires https://git-scm.com/[``git``], a https://github.com[GitHub account], and a https://travis-ci.org[Travis CI] account (you can sign in with GitHub).
 
-. Fork this repository
-. Enable your fork's repository on Travis
-. Create an access token on GitHub
-. In the Travis settings for your fork, save this access token as an environment variable, ``GITHUB_TOKEN``
+. https://help.github.com/en/articles/fork-a-repo[Fork] this repository
+. https://travis-ci.org/account/repositories[Enable] your fork's repository on Travis
+. https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line[Create] an access token on GitHub
+. https://docs.travis-ci.com/user/environment-variables/#defining-variables-in-repository-settings[In the Travis settings] for your fork, save this access token as an environment variable, ``GITHUB_TOKEN``
 
 === Local
 
@@ -31,7 +31,7 @@ Requires modern versions of https://www.ruby-lang.org/en/[ruby] and https://bund
 # install dependencies
 bundle
 
-# build html, pdf, to a folder called "out"
+# build html and pdf to a folder called "out"
 rake html
 rake pdf
 
