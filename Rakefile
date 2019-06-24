@@ -20,12 +20,12 @@ autoload :FileUtils, 'fileutils'
 
 desc 'Build the HTML5 format'
 task :html do
-  # TODO move logic to images task
-  ((FileList.new '**/*.{jpg,png,svg}').exclude %(#{BUILD_DIR}/**/*)).each do |img_path|
-    target_dir = File.join BUILD_DIR, (File.dirname img_path)
-    FileUtils.mkdir_p target_dir
-    FileUtils.cp img_path, target_dir
-  end
+  # # TODO move logic to images task
+  # ((FileList.new '**/*.{jpg,png,svg}').exclude %(#{BUILD_DIR}/**/*)).each do |img_path|
+  #   target_dir = File.join BUILD_DIR, (File.dirname img_path)
+  #   FileUtils.mkdir_p target_dir
+  #   FileUtils.cp img_path, target_dir
+  # end
   require 'asciidoctor'
   Asciidoctor.convert_file MASTER_FILENAME,
                            safe: :unsafe,
@@ -55,10 +55,19 @@ task :epub, [:attrs] do |_, args|
                            mkdirs: true
 end
 
-
+desc 'Build docbook format'
+task :docbook, [:attrs] do |_, args|
+  require 'asciidoctor'
+  Asciidoctor.convert_file MASTER_FILENAME,
+                           safe: :unsafe,
+                           backend: 'docbook',
+                           attributes: [args[:attrs]].compact * ' ',
+                           to_dir: BUILD_DIR,
+                           mkdirs: true
+end
 
 desc 'Build all formats'
-task all: [:html, :pdf]
+task all: [:html, :pdf, :docbook]
 # task all: [:html, :pdf, :epub]
 task default: [:all]
 
